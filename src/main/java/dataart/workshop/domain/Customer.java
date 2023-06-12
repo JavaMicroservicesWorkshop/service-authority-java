@@ -11,19 +11,28 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(name = "users")
-public class User {
+@Table(name = "customers")
+public class Customer {
 
     @Id
     @GeneratedValue
     private Long id;
 
     @Column
-    private String username;
+    private String customerId;
+
+    @Column
+    private String email;
 
     @Column
     private String password;
 
     @Column
-    private UserAuthority userAuthority;
+    private String firstName;
+
+    @Column
+    private String lastName;
+
+    @Column
+    private String phoneNumber;
 }

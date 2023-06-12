@@ -1,6 +1,6 @@
-package dataart.workshop.service;
+package dataart.workshop.security;
 
-import dataart.workshop.domain.UserDetailsBla;
+import dataart.workshop.domain.UserAuthority;
 import dataart.workshop.dto.v1.LoginRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,10 +16,10 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
 
     public String authenticateAndGenerateToken(LoginRequest loginRequest) {
-        var token = new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword());
+        var token = new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword());
         Authentication authentication = authenticationManager.authenticate(token);
 
-        var userDetails = new UserDetailsBla(authentication.getAuthorities(), authentication.getName());
+        var userDetails = new UserAuthority(authentication.getName(), authentication.getAuthorities());
         return tokenService.generateToken(userDetails);
     }
 }

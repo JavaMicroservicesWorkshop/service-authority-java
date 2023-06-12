@@ -5,8 +5,8 @@ import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
-import dataart.workshop.security.Jwks;
-import dataart.workshop.service.CustomUserDetailsService;
+import dataart.workshop.utils.JwtGenerator;
+import dataart.workshop.security.JwtUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,7 +18,6 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -36,7 +35,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     private RSAKey rsaKey;
-    private final CustomUserDetailsService customUserDetailsService;
+    private final JwtUserDetailsService userDetailsServiceImpl;
 
     @Bean
     public AuthenticationManager authManager(UserDetailsService userDetailsService) {
@@ -48,38 +47,37 @@ public class SecurityConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return customUserDetailsService;
+        return userDetailsServiceImpl;
     }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-                .headers(AbstractHttpConfigurer::disable) //comment to show h2 console
+                //.headers(AbstractHttpConfigurer::disable) Uncomment to get access to H2 DB dashboard
                 .cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests( auth -> auth
-                        //.requestMatchers("/api/v1/registration").permitAll()
                         .anyRequest().permitAll()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
+                .oauth2ResourceServer(configurer -> configurer.jwt(Customizer.withDefaults()))
                 .build();
     }
 
     @Bean
     public JWKSource<SecurityContext> jwkSource() {
-        rsaKey = Jwks.generateRsa();
+        rsaKey = JwtGenerator.generateRsa();
         JWKSet jwkSet = new JWKSet(rsaKey);
         return (jwkSelector, securityContext) -> jwkSelector.select(jwkSet);
     }
 
     @Bean
-    JwtEncoder jwtEncoder(JWKSource<SecurityContext> jwks) {
+    public JwtEncoder jwtEncoder(JWKSource<SecurityContext> jwks) {
         return new NimbusJwtEncoder(jwks);
     }
 
     @Bean
-    JwtDecoder jwtDecoder() throws JOSEException {
+    public JwtDecoder jwtDecoder() throws JOSEException {
          return NimbusJwtDecoder.withPublicKey(rsaKey.toRSAPublicKey()).build();
     }
 

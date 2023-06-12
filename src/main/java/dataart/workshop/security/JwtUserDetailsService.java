@@ -1,20 +1,27 @@
 package dataart.workshop.security;
 
-import dataart.workshop.repository.UserRepository;
+import dataart.workshop.domain.Customer;
+import dataart.workshop.domain.SecurityCustomer;
+import dataart.workshop.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Component;
 
-@Slf4j
 @RequiredArgsConstructor
+@Component
 public class JwtUserDetailsService implements UserDetailsService {
 
-    private final UserRepository userRepository;
+    private static final String CUSTOMER_NOT_FOUND = "Can't find customer by username: %s";
+
+    private final CustomerRepository customerRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return null;
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Customer customer = customerRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException(CUSTOMER_NOT_FOUND.formatted(email)));
+
+        return new SecurityCustomer(customer);
     }
 }
