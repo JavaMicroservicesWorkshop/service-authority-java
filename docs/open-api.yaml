@@ -25,18 +25,14 @@ paths:
               $ref: '#/components/schemas/LoginDto'
         required: true
       responses:
-        '201':
-          description: Registered successfully
+        '200':
+          description: Authorized successfully
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RegisterCustomerResponse'
-        '400':
-          description: Bad registration request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BadRequestDto'
+                $ref: '#/components/schemas/JwtTokenDto'
+        '401':
+          description: Unauthorized
   /api/v1/customers:
     get:
       tags:
@@ -87,7 +83,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/RegisterCustomerResponse'
         '400':
-          description: Bad registration request
+          description: Bad request
           content:
             application/json:
               schema:
@@ -115,7 +111,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/CustomerDto'
         '404':
-          description: Customer not found by id
+          description: Not found
           content:
             application/json:
               schema:
@@ -139,23 +135,23 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RegisterCustomerRequest'
+              $ref: '#/components/schemas/UpdateCustomerRequest'
         required: true
       responses:
-        '201':
+        '200':
           description: Updated sucefully
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/CustomerDto'
         '400':
-          description: Bad update request
+          description: Bad request
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestDto'
         '404':
-          description: Customer not found by id
+          description: Not found
           content:
             application/json:
               schema:
@@ -262,6 +258,12 @@ components:
         password:
           type: string
           example: john123
+    JwtTokenDto:
+      type: object
+      properties:
+        token:
+          type: string
+          example: 2df5278e-f2b3-4fe6-b722-9e2287a47330
     CustomerDto:
       type: object
       properties:
@@ -305,6 +307,26 @@ components:
         newPassword:
           type: string
           example: newString
+    UpdateCustomerRequest:
+      required:
+        - firstName
+        - lastName
+        - email
+        - phoneNumber
+      type: object
+      properties:
+        firstName:
+          type: string
+          example: John
+        lastName:
+          type: string
+          example: Doe
+        email:
+          type: string
+          example: john-doe@gmail.com
+        phoneNumber:
+          type: string
+          example: 380930987600
     RegisterCustomerRequest:
       required:
         - firstName
