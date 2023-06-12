@@ -1,6 +1,7 @@
 package dataart.workshop.security;
 
 import dataart.workshop.domain.UserAuthority;
+import dataart.workshop.dto.v1.JwtTokenDto;
 import dataart.workshop.dto.v1.LoginRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,11 +16,11 @@ public class AuthenticationService {
     private final TokenService tokenService;
     private final AuthenticationManager authenticationManager;
 
-    public String authenticateAndGenerateToken(LoginRequest loginRequest) {
+    public JwtTokenDto authenticateAndGenerateToken(LoginRequest loginRequest) {
         var token = new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword());
         Authentication authentication = authenticationManager.authenticate(token);
 
         var userDetails = new UserAuthority(authentication.getName(), authentication.getAuthorities());
-        return tokenService.generateToken(userDetails);
+        return new JwtTokenDto(tokenService.generateToken(userDetails));
     }
 }

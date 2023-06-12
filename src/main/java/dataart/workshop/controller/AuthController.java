@@ -1,5 +1,6 @@
 package dataart.workshop.controller;
 
+import dataart.workshop.dto.v1.JwtTokenDto;
 import dataart.workshop.dto.v1.LoginRequest;
 import dataart.workshop.security.AuthenticationService;
 import jakarta.validation.Valid;
@@ -18,7 +19,7 @@ public class AuthController {
     private final AuthenticationService authenticationService;
 
     @PostMapping("/login")
-    public String login(@RequestBody @Valid LoginRequest loginRequest) throws AuthenticationException {
+    public JwtTokenDto login(@RequestBody @Valid LoginRequest loginRequest) throws AuthenticationException {
         return authenticationService.authenticateAndGenerateToken(loginRequest);
     }
 
