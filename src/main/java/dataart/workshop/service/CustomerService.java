@@ -84,6 +84,7 @@ public class CustomerService {
         customer.setPassword(passwordEncoder.encode(changePasswordRequest.getOldPassword()));
     }
 
+    @Transactional
     public void deleteByCustomerId(String customerId) {
         validator.validateCustomerPresence(customerId);
 

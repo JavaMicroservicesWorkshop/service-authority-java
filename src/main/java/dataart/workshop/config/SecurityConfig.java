@@ -53,7 +53,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-                //.headers(AbstractHttpConfigurer::disable) Uncomment to get access to H2 DB dashboard
+                .headers(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests( auth -> auth

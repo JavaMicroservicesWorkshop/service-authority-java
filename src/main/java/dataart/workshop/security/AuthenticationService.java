@@ -20,7 +20,7 @@ public class AuthenticationService {
         var token = new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword());
         Authentication authentication = authenticationManager.authenticate(token);
 
-        var userDetails = new UserAuthority(authentication.getName(), authentication.getAuthorities());
-        return new JwtTokenDto(tokenService.generateToken(userDetails));
+        var userAuthority = new UserAuthority(authentication.getName(), authentication.getAuthorities());
+        return new JwtTokenDto(tokenService.generateToken(userAuthority));
     }
 }
