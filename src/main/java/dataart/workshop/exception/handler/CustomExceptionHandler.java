@@ -18,8 +18,8 @@ import java.util.Map;
 public class CustomExceptionHandler {
 
     private static final String ERROR = "error";
+    private static final String ERRORS = "errorMessages";
     private static final String ERROR_MESSAGE = "errorMessage";
-    private static final String VALIDATION_ERRORS = "errors";
 
     private static final String BAD_REQUEST = "Bad request";
     private static final String UNAUTHORIZED = "Unauthorized";
@@ -27,7 +27,7 @@ public class CustomExceptionHandler {
     private static final String NOT_FOUND = "Not found";
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Map<String, Object>> handleValidationErrors(MethodArgumentNotValidException exception) {
+    public ResponseEntity<Map<String, Object>> handleMethodArgumentNotValidException(MethodArgumentNotValidException exception) {
         List<String> errors = exception.getBindingResult().getFieldErrors()
                 .stream()
                 .map(fieldError -> fieldError.getField() + " : " + fieldError.getDefaultMessage())
@@ -35,7 +35,7 @@ public class CustomExceptionHandler {
 
         Map<String, Object> map = new LinkedHashMap<>();
         map.put(ERROR, BAD_REQUEST);
-        map.put(VALIDATION_ERRORS, errors);
+        map.put(ERRORS, errors);
         return new ResponseEntity<>(map, new HttpHeaders(), HttpStatus.BAD_REQUEST);
     }
 

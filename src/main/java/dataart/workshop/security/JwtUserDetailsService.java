@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class JwtUserDetailsService implements UserDetailsService {
 
-    private static final String CUSTOMER_NOT_FOUND = "Can't find customer by username: %s";
+    private static final String CUSTOMER_NOT_FOUND = "Can't find customer by email: %s";
 
     private final CustomerRepository customerRepository;
 
