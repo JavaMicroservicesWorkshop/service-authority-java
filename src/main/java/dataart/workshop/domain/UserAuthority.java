@@ -1,8 +1,8 @@
 package dataart.workshop.domain;
 
-public enum UserAuthority {
+import org.springframework.security.core.GrantedAuthority;
 
-    USER,
-    ADMIN
+import java.util.Collection;
 
+public record UserAuthority(String username, Collection<? extends GrantedAuthority> authorities) {
 }

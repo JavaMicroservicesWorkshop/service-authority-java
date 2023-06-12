@@ -1,4 +1,4 @@
-package dataart.workshop.security;
+package dataart.workshop.utils;
 
 import com.nimbusds.jose.jwk.RSAKey;
 
@@ -7,9 +7,9 @@ import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 import java.util.UUID;
 
-public class Jwks {
+public class JwtGenerator {
 
-    private Jwks() {}
+    private JwtGenerator() {}
 
     public static RSAKey generateRsa() {
         KeyPair keyPair = KeyGeneratorUtils.generateRsaKey();

@@ -1,6 +1,6 @@
-package dataart.workshop.service;
+package dataart.workshop.security;
 
-import dataart.workshop.domain.UserDetailsBla;
+import dataart.workshop.domain.UserAuthority;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
@@ -18,10 +18,10 @@ public class TokenService {
 
     private final JwtEncoder encoder;
 
-    public String generateToken(UserDetailsBla userDetailsBla) {
+    public String generateToken(UserAuthority userAuthority) {
         Instant now = Instant.now();
 
-        String scope = userDetailsBla.authorities().stream()
+        String scope = userAuthority.authorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining(" "));
 
@@ -29,10 +29,12 @@ public class TokenService {
                 .issuer("DataArt")
                 .issuedAt(now)
                 .expiresAt(now.plus(1, ChronoUnit.HOURS))
-                .subject(userDetailsBla.username())
+                .subject(userAuthority.username())
                 .claim("scope", scope)
                 .build();
 
-        return this.encoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
+        return encoder
+                .encode(JwtEncoderParameters.from(claims))
+                .getTokenValue();
     }
 }
