@@ -25,7 +25,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class CustomerService {
 
-    private static final String CANT_FIND_CUSTOMER_ERROR = "Can find customer by id: %s";
+    private static final String CANT_FIND_CUSTOMER_ERROR = "Can't find customer by id: %s";
 
     private final PageUtils pageUtils;
     private final CustomerValidator validator;
@@ -59,7 +59,7 @@ public class CustomerService {
     }
 
     @Transactional
-    public CustomerDto update( String customerId, UpdateCustomerRequest updateCustomerRequest) {
+    public CustomerDto update(String customerId, UpdateCustomerRequest updateCustomerRequest) {
         Customer existingCustomer = findOrElseThrow(customerId);
 
         Customer updatedCustomer = customerConverter.toCustomer(updateCustomerRequest);
