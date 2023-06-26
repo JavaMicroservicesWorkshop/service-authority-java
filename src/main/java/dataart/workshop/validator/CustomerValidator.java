@@ -25,7 +25,7 @@ public class CustomerValidator {
     public void validateCustomerPresence(String customerId) {
         boolean exists = customerRepository.existsByCustomerId(customerId);
         if (!exists) {
-            throw new CustomerNotFoundException("Can not find customer with id: %s".formatted(customerId));
+            throw new CustomerNotFoundException("Can't find customer with id: %s".formatted(customerId));
         }
     }
 
