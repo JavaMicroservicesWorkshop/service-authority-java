@@ -2,6 +2,8 @@ package dataart.workshop.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -35,4 +37,12 @@ public class Customer {
 
     @Column
     private String phoneNumber;
+
+    @Column
+    @Enumerated(value = EnumType.STRING)
+    private Role role;
+
+    public enum Role {
+        USER, ADMIN
+    }
 }

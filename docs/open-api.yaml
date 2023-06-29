@@ -33,6 +33,26 @@ paths:
                 $ref: '#/components/schemas/JwtTokenDto'
         '401':
           description: Unauthorized
+  /api/v1/rights:
+    get:
+      tags:
+        - rights
+      summary:  Check is customer able to perform Admin actions
+      description: Check is customer able to perform Admin actions
+      operationId: checkCustomerRights
+      parameters:
+        - name: token
+          in: header
+          description: JWT token of user to check rights
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Authorized successfully
+        '403':
+          description: Forbidden
   /api/v1/customers:
     get:
       tags:

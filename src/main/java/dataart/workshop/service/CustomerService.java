@@ -51,7 +51,7 @@ public class CustomerService {
         validator.validateCustomerDuplication(customerRegistrationRequest.getEmail());
         String customerId = UUID.randomUUID().toString();
 
-        Customer registeredCustomer = customerConverter.toCustomer(customerRegistrationRequest, customerId);
+        Customer registeredCustomer = customerConverter.toCustomer(customerRegistrationRequest, customerId, Customer.Role.USER);
         registeredCustomer.setPassword(passwordEncoder.encode(registeredCustomer.getPassword()));
 
         customerRepository.save(registeredCustomer);

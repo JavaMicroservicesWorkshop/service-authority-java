@@ -51,7 +51,7 @@ public class CustomerConverter {
         return customer;
     }
 
-    public Customer toCustomer(CustomerRegistrationRequest customerRegistrationRequest, String customerId) {
+    public Customer toCustomer(CustomerRegistrationRequest customerRegistrationRequest, String customerId, Customer.Role role) {
         Customer customer = new Customer();
 
         customer.setCustomerId(customerId);
@@ -63,6 +63,7 @@ public class CustomerConverter {
         customer.setLastName(customerRegistrationRequest.getLastName());
 
         customer.setPhoneNumber(customerRegistrationRequest.getPhoneNumber());
+        customer.setRole(role);
 
         return customer;
     }

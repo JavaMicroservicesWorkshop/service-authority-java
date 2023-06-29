@@ -10,6 +10,7 @@ import dataart.workshop.service.CustomerService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -30,11 +31,13 @@ public class CustomerController {
     private final CustomerService customerService;
 
     @GetMapping
+    @PreAuthorize("hasAnyAuthority('SCOPE_ADMIN')")
     public PaginatedCustomerDto getAll(@RequestParam(required = false) Integer page, @RequestParam(required = false) Integer size) {
         return customerService.findAll(page, size);
     }
 
     @GetMapping("/{customerId}")
+    @PreAuthorize("hasAnyAuthority('SCOPE_ADMIN')")
     public CustomerDto getByCustomerId(@PathVariable String customerId) {
         return customerService.findByCustomerId(customerId);
     }
@@ -45,17 +48,20 @@ public class CustomerController {
         return customerService.register(customerRegistrationRequest);
     }
 
+    //todo: validate with @PreAuthorize that User can update only his information
     @PutMapping("/{customerId}")
     public CustomerDto update(@PathVariable String customerId, @RequestBody @Valid UpdateCustomerRequest updateCustomerRequest) {
         return customerService.update(customerId, updateCustomerRequest);
     }
 
+    //todo: validate with @PreAuthorize that User can change only his password
     @PatchMapping("/{customerId}")
     public void changePassword(@PathVariable String customerId, @RequestBody ChangePasswordRequest changePasswordRequest) {
         customerService.changePassword(customerId, changePasswordRequest);
     }
 
     @DeleteMapping("/{customerId}")
+    @PreAuthorize("hasRole('ADMIN')")
     public void delete(@PathVariable String customerId) {
         customerService.deleteByCustomerId(customerId);
     }

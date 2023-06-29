@@ -7,6 +7,8 @@ eureka:
       defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
 
 spring:
+  application:
+    name: service-authority-java
   h2:
     console:
       enabled: true
@@ -17,3 +19,8 @@ spring:
     driverClassName: org.h2.Driver
   jpa:
     spring:jpa.database-platform: org.hibernate.dialect.H2Dialect
+
+admin:
+  email: admin@gmail.com
+  #todo: pass admin password from configuration properties
+  password: pwd
