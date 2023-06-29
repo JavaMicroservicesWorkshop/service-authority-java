@@ -31,13 +31,13 @@ public class CustomerController {
     private final CustomerService customerService;
 
     @GetMapping
-    @PreAuthorize("hasAnyAuthority('SCOPE_ADMIN')")
+    @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
     public PaginatedCustomerDto getAll(@RequestParam(required = false) Integer page, @RequestParam(required = false) Integer size) {
         return customerService.findAll(page, size);
     }
 
     @GetMapping("/{customerId}")
-    @PreAuthorize("hasAnyAuthority('SCOPE_ADMIN')")
+    @PreAuthorize("hasAuthority('SCOPE_ADMIN')" + "|| @customerSecurityService.isTheSameUser(authentication, #customerId)")
     public CustomerDto getByCustomerId(@PathVariable String customerId) {
         return customerService.findByCustomerId(customerId);
     }
@@ -48,20 +48,20 @@ public class CustomerController {
         return customerService.register(customerRegistrationRequest);
     }
 
-    //todo: validate with @PreAuthorize that User can update only his information
     @PutMapping("/{customerId}")
+    @PreAuthorize("isAuthenticated()" + "&& @customerSecurityService.isTheSameUser(authentication, #customerId)")
     public CustomerDto update(@PathVariable String customerId, @RequestBody @Valid UpdateCustomerRequest updateCustomerRequest) {
         return customerService.update(customerId, updateCustomerRequest);
     }
 
-    //todo: validate with @PreAuthorize that User can change only his password
     @PatchMapping("/{customerId}")
+    @PreAuthorize("isAuthenticated()" + "&& @customerSecurityService.isTheSameUser(authentication, #customerId)")
     public void changePassword(@PathVariable String customerId, @RequestBody ChangePasswordRequest changePasswordRequest) {
         customerService.changePassword(customerId, changePasswordRequest);
     }
 
     @DeleteMapping("/{customerId}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('SCOPE_ADMIN')" + "|| @customerSecurityService.isTheSameUser(authentication, #customerId)")
     public void delete(@PathVariable String customerId) {
         customerService.deleteByCustomerId(customerId);
     }

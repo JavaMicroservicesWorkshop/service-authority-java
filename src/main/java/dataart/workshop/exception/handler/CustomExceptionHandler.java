@@ -14,6 +14,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+// todo: refactor using RestControllerAdvice instead of ControllerAdvice
 @RestControllerAdvice
 public class CustomExceptionHandler {
 
