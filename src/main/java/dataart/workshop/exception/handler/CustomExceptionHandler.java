@@ -1,7 +1,7 @@
 package dataart.workshop.exception.handler;
 
-import dataart.workshop.exception.CustomerAlreadyExistException;
-import dataart.workshop.exception.CustomerNotFoundException;
+import dataart.workshop.exception.UserAlreadyExistException;
+import dataart.workshop.exception.UserNotFoundException;
 import dataart.workshop.exception.IncorrectPasswordException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -39,8 +39,8 @@ public class CustomExceptionHandler {
         return new ResponseEntity<>(map, new HttpHeaders(), HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(CustomerAlreadyExistException.class)
-    public ResponseEntity<Map<String, Object>> handleCustomerAlreadyExistsException(CustomerAlreadyExistException exception) {
+    @ExceptionHandler(UserAlreadyExistException.class)
+    public ResponseEntity<Map<String, Object>> handleUserAlreadyExistsException(UserAlreadyExistException exception) {
         Map<String, Object> map = new LinkedHashMap<>();
         map.put(ERROR, CONFLICT);
         map.put(ERROR_MESSAGE, exception.getMessage());
@@ -57,8 +57,8 @@ public class CustomExceptionHandler {
         return new ResponseEntity<>(map, new HttpHeaders(), HttpStatus.UNAUTHORIZED);
     }
 
-    @ExceptionHandler(CustomerNotFoundException.class)
-    public ResponseEntity<Map<String, Object>> handleCustomerNotFoundException(CustomerNotFoundException exception) {
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<Map<String, Object>> handleUserNotFoundException(UserNotFoundException exception) {
         Map<String, Object> map = new LinkedHashMap<>();
         map.put(ERROR, NOT_FOUND);
         map.put(ERROR_MESSAGE, exception.getMessage());

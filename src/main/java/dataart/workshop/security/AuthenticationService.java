@@ -17,10 +17,10 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
 
     public JwtTokenDto authenticateAndGenerateToken(LoginRequest loginRequest) {
-        var token = new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword());
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword());
         Authentication authentication = authenticationManager.authenticate(token);
 
-        var userAuthority = new UserAuthority(authentication.getName(), authentication.getAuthorities());
+        UserAuthority userAuthority = new UserAuthority(authentication.getName(), authentication.getAuthorities());
         return new JwtTokenDto(tokenService.generateToken(userAuthority));
     }
 }

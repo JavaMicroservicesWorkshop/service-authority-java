@@ -2,11 +2,11 @@ openapi: 3.0.3
 info:
   title: Authority Service
   description: |-
-    Service which manages authority grants on the Customer actions. Also exposes Customers API
+    Service which manages authority grants on the User actions. Also exposes Users API
   version: 1.0.11
 tags:
-  - name: customers
-    description: Customers API
+  - name: users
+    description: Users API
   - name: login
     description: Login API
 paths:
@@ -16,7 +16,7 @@ paths:
         - login
       summary:  Login and generate JWT token
       description: Login and generate JWT token
-      operationId: loginCustomer
+      operationId: loginUser
       requestBody:
         description: Provide user credentials
         content:
@@ -33,13 +33,13 @@ paths:
                 $ref: '#/components/schemas/JwtTokenDto'
         '401':
           description: Unauthorized
-  /api/v1/customers:
+  /api/v1/users:
     get:
       tags:
-        - customers
-      summary: Get paginated list of customers
-      description: Get all customers
-      operationId: getAllCustomers
+        - users
+      summary: Get paginated list of users
+      description: Get all users
+      operationId: getAllUsers
       parameters:
         - name: page
           in: query
@@ -57,23 +57,23 @@ paths:
             format: int64
       responses:
         '200':
-          description: Returns paginated list of Customers
+          description: Returns paginated list of Users
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PaginatedCustomerDto'
+                $ref: '#/components/schemas/PaginatedUserDto'
     post:
       tags:
-        - customers
-      summary: Register new customer
-      description: Register new customer
-      operationId: registerCustomer
+        - users
+      summary: Register new user
+      description: Register new user
+      operationId: registerUser
       requestBody:
-        description: Register new customer in the system
+        description: Register new user in the system
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RegisterCustomerRequest'
+              $ref: '#/components/schemas/RegisterUserRequest'
         required: true
       responses:
         '201':
@@ -81,24 +81,24 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RegisterCustomerResponse'
+                $ref: '#/components/schemas/RegisterUserResponse'
         '400':
           description: Bad request
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestDto'
-  /api/v1/customers/{customerId}:
+  /api/v1/users/{userId}:
     get:
       tags:
-        - customers
-      summary: Get customer by id
-      description: Get customer by id
-      operationId: getCustomerById
+        - users
+      summary: Get user by id
+      description: Get user by id
+      operationId: getUserById
       parameters:
-        - name: customerId
+        - name: userId
           in: path
-          description: ID of customer to update
+          description: ID of user to update
           required: true
           schema:
             type: integer
@@ -109,7 +109,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CustomerDto'
+                $ref: '#/components/schemas/UserDto'
         '404':
           description: Not found
           content:
@@ -118,24 +118,24 @@ paths:
                 $ref: '#/components/schemas/NotFoundDto'
     put:
       tags:
-        - customers
-      summary: Update customer by id
-      description: Update customer by id
-      operationId: updateCustomer
+        - users
+      summary: Update user by id
+      description: Update user by id
+      operationId: updateUser
       parameters:
-        - name: customerId
+        - name: userId
           in: path
-          description: ID of customer to update
+          description: ID of user to update
           required: true
           schema:
             type: integer
             format: int64
       requestBody:
-        description: Update existing customer in the system
+        description: Update existing user in the system
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateCustomerRequest'
+              $ref: '#/components/schemas/UpdateUserRequest'
         required: true
       responses:
         '200':
@@ -143,7 +143,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CustomerDto'
+                $ref: '#/components/schemas/UserDto'
         '400':
           description: Bad request
           content:
@@ -158,24 +158,24 @@ paths:
                 $ref: '#/components/schemas/NotFoundDto'
     patch:
       tags:
-        - customers
-      summary: Change password of the customer
-      description: Change password of the customer
-      operationId: changeCustomerPassword
+        - users
+      summary: Change password of the user
+      description: Change password of the user
+      operationId: changeUserPassword
       parameters:
-        - name: customerId
+        - name: userId
           in: path
-          description: ID of customer to change password
+          description: ID of user to change password
           required: true
           schema:
             type: integer
             format: int64
       requestBody:
-        description: Change existing customer password
+        description: Change existing user password
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ChangeCustomerPasswordRequest'
+              $ref: '#/components/schemas/ChangeUserPasswordRequest'
         required: true
       responses:
         '200':
@@ -187,21 +187,21 @@ paths:
               schema:
                 $ref: '#/components/schemas/InvalidPasswordDto'
         '404':
-          description: Customer not found by id
+          description: User not found by id
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotFoundDto'
     delete:
       tags:
-        - customers
-      summary: Delete existing customer
-      description: Delete existing customer
-      operationId: deleteCustomer
+        - users
+      summary: Delete existing user
+      description: Delete existing user
+      operationId: deleteUser
       parameters:
-        - name: customerId
+        - name: userId
           in: path
-          description: ID of customer to delete
+          description: ID of user to delete
           required: true
           schema:
             type: integer
@@ -210,7 +210,7 @@ paths:
         '200':
           description: Deleted successfully
         '404':
-          description: Customer not found by id
+          description: User not found by id
           content:
             application/json:
               schema:
@@ -234,7 +234,7 @@ components:
           example: Not Found
         errorMessage:
           type: string
-          example: Customer with id 5de8b415-80a0-4e35-afbb-90467724d835 not found
+          example: User with id 5de8b415-80a0-4e35-afbb-90467724d835 not found
     BadRequestDto:
       type: object
       properties:
@@ -264,7 +264,7 @@ components:
         token:
           type: string
           example: 2df5278e-f2b3-4fe6-b722-9e2287a47330
-    CustomerDto:
+    UserDto:
       type: object
       properties:
         id:
@@ -282,20 +282,20 @@ components:
         phoneNumber:
           type: string
           example: 380930987600
-    PaginatedCustomerDto:
+    PaginatedUserDto:
       type: object
       properties:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/CustomerDto'
+            $ref: '#/components/schemas/UserDto'
         page:
           type: integer
           example: 0
         size:
           type: integer
           example: 10
-    ChangeCustomerPasswordRequest:
+    ChangeUserPasswordRequest:
       required:
         - oldPassword
         - newPassword
@@ -307,7 +307,7 @@ components:
         newPassword:
           type: string
           example: newString
-    UpdateCustomerRequest:
+    UpdateUserRequest:
       required:
         - firstName
         - lastName
@@ -327,7 +327,7 @@ components:
         phoneNumber:
           type: string
           example: 380930987600
-    RegisterCustomerRequest:
+    RegisterUserRequest:
       required:
         - firstName
         - lastName
@@ -350,7 +350,7 @@ components:
         phoneNumber:
           type: string
           example: 380930987600
-    RegisterCustomerResponse:
+    RegisterUserResponse:
       type: object
       properties:
         id:

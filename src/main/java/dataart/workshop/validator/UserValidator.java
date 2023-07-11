@@ -1,31 +1,31 @@
 package dataart.workshop.validator;
 
-import dataart.workshop.exception.CustomerAlreadyExistException;
-import dataart.workshop.exception.CustomerNotFoundException;
+import dataart.workshop.exception.UserAlreadyExistException;
+import dataart.workshop.exception.UserNotFoundException;
 import dataart.workshop.exception.IncorrectPasswordException;
-import dataart.workshop.repository.CustomerRepository;
+import dataart.workshop.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class CustomerValidator {
+public class UserValidator {
 
     private final PasswordEncoder passwordEncoder;
-    private final CustomerRepository customerRepository;
+    private final UserRepository userRepository;
 
-    public void validateCustomerDuplication(String email) {
-        boolean alreadyExists = customerRepository.existsByEmail(email);
+    public void validateUserDuplication(String email) {
+        boolean alreadyExists = userRepository.existsByEmail(email);
         if (alreadyExists) {
-            throw new CustomerAlreadyExistException("User with email %s already exists".formatted(email));
+            throw new UserAlreadyExistException("User with email %s already exists".formatted(email));
         }
     }
 
-    public void validateCustomerPresence(String customerId) {
-        boolean exists = customerRepository.existsByCustomerId(customerId);
+    public void validateUserPresence(String userId) {
+        boolean exists = userRepository.existsByUserId(userId);
         if (!exists) {
-            throw new CustomerNotFoundException("Can't find customer with id: %s".formatted(customerId));
+            throw new UserNotFoundException("Can't find user with id: %s".formatted(userId));
         }
     }
 

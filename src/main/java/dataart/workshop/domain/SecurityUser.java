@@ -8,9 +8,9 @@ import java.util.Collection;
 import java.util.Collections;
 
 @RequiredArgsConstructor
-public class SecurityCustomer implements UserDetails {
+public class SecurityUser implements UserDetails {
 
-    private final Customer customer;
+    private final User user;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -19,12 +19,12 @@ public class SecurityCustomer implements UserDetails {
 
     @Override
     public String getPassword() {
-        return customer.getPassword();
+        return user.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return customer.getEmail();
+        return user.getEmail();
     }
 
     @Override
