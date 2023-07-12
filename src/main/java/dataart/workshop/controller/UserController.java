@@ -1,11 +1,11 @@
 package dataart.workshop.controller;
 
 import dataart.workshop.dto.v1.ChangePasswordRequest;
+import dataart.workshop.dto.v1.PaginatedUserDto;
+import dataart.workshop.dto.v1.UpdateUserRequest;
 import dataart.workshop.dto.v1.UserDto;
 import dataart.workshop.dto.v1.UserRegistrationRequest;
 import dataart.workshop.dto.v1.UserRegistrationResponse;
-import dataart.workshop.dto.v1.PaginatedUserDto;
-import dataart.workshop.dto.v1.UpdateUserRequest;
 import dataart.workshop.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

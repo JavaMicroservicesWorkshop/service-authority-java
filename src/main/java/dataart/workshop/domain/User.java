@@ -1,6 +1,13 @@
 package dataart.workshop.domain;
 
-import jakarta.persistence.*;
+import dataart.workshop.dto.v1.Role;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -31,4 +38,7 @@ public class User {
 
     @Column
     private String phoneNumber;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 }

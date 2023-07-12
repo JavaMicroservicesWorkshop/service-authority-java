@@ -1,8 +1,8 @@
 package dataart.workshop.exception.handler;
 
+import dataart.workshop.exception.IncorrectPasswordException;
 import dataart.workshop.exception.UserAlreadyExistException;
 import dataart.workshop.exception.UserNotFoundException;
-import dataart.workshop.exception.IncorrectPasswordException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

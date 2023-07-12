@@ -1,10 +1,11 @@
 package dataart.workshop.converter;
 
 import dataart.workshop.domain.User;
+import dataart.workshop.dto.v1.PaginatedUserDto;
+import dataart.workshop.dto.v1.Role;
+import dataart.workshop.dto.v1.UpdateUserRequest;
 import dataart.workshop.dto.v1.UserDto;
 import dataart.workshop.dto.v1.UserRegistrationRequest;
-import dataart.workshop.dto.v1.PaginatedUserDto;
-import dataart.workshop.dto.v1.UpdateUserRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
@@ -21,6 +22,7 @@ public class UserConverter {
         dto.setLastName(user.getLastName());
         dto.setEmail(user.getEmail());
         dto.setPhoneNumber(user.getPhoneNumber());
+        dto.setRole(user.getRole());
 
         return dto;
     }
@@ -47,22 +49,25 @@ public class UserConverter {
         user.setLastName(request.getLastName());
         user.setEmail(request.getEmail());
         user.setPhoneNumber(request.getPhoneNumber());
+        user.setRole(Role.valueOf(request.getRole()));
 
         return user;
     }
 
-    public User toUser(UserRegistrationRequest userRegistrationRequest, String userId) {
+    public User toUser(UserRegistrationRequest request, String userId) {
         User user = new User();
 
         user.setUserId(userId);
 
-        user.setEmail(userRegistrationRequest.getEmail());
-        user.setPassword(userRegistrationRequest.getPassword());
+        user.setEmail(request.getEmail());
+        user.setPassword(request.getPassword());
 
-        user.setFirstName(userRegistrationRequest.getFirstName());
-        user.setLastName(userRegistrationRequest.getLastName());
+        user.setFirstName(request.getFirstName());
+        user.setLastName(request.getLastName());
 
-        user.setPhoneNumber(userRegistrationRequest.getPhoneNumber());
+        user.setPhoneNumber(request.getPhoneNumber());
+
+        user.setRole(Role.valueOf(request.getRole()));
 
         return user;
     }

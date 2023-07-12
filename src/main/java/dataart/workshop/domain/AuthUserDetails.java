@@ -1,20 +1,23 @@
 package dataart.workshop.domain;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.Collections;
 
-@RequiredArgsConstructor
-public class SecurityUser implements UserDetails {
+public class AuthUserDetails implements UserDetails {
 
     private final User user;
+    private final Collection<? extends GrantedAuthority> grantedAuthorities;
+
+    public AuthUserDetails(User user) {
+        this.user = user;
+        this.grantedAuthorities = user.getRole().getAuthorities();
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.emptyList();
+        return grantedAuthorities;
     }
 
     @Override

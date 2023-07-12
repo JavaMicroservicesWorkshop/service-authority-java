@@ -5,8 +5,8 @@ import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
+import dataart.workshop.security.AuthDetailsService;
 import dataart.workshop.utils.JwtGenerator;
-import dataart.workshop.security.JwtUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -35,7 +35,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     private RSAKey rsaKey;
-    private final JwtUserDetailsService userDetailsServiceImpl;
+    private final AuthDetailsService authDetailsService;
 
     @Bean
     public AuthenticationManager authManager(UserDetailsService userDetailsService) {
@@ -47,7 +47,7 @@ public class SecurityConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return userDetailsServiceImpl;
+        return authDetailsService;
     }
 
     @Bean
@@ -56,7 +56,7 @@ public class SecurityConfig {
                 .headers(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests( auth -> auth
+                .authorizeHttpRequests(auth -> auth
                         .anyRequest().permitAll()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -78,7 +78,7 @@ public class SecurityConfig {
 
     @Bean
     public JwtDecoder jwtDecoder() throws JOSEException {
-         return NimbusJwtDecoder.withPublicKey(rsaKey.toRSAPublicKey()).build();
+        return NimbusJwtDecoder.withPublicKey(rsaKey.toRSAPublicKey()).build();
     }
 
     @Bean

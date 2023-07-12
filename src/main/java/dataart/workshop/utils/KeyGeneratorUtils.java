@@ -6,7 +6,8 @@ import java.security.KeyPairGenerator;
 
 final class KeyGeneratorUtils {
 
-    private KeyGeneratorUtils() {}
+    private KeyGeneratorUtils() {
+    }
 
     static KeyPair generateRsaKey() {
         KeyPair keyPair;

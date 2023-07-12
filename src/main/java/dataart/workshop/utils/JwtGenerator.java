@@ -9,7 +9,8 @@ import java.util.UUID;
 
 public class JwtGenerator {
 
-    private JwtGenerator() {}
+    private JwtGenerator() {
+    }
 
     public static RSAKey generateRsa() {
         KeyPair keyPair = KeyGeneratorUtils.generateRsaKey();

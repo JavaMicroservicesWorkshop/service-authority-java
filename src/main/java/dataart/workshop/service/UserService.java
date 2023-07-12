@@ -3,11 +3,11 @@ package dataart.workshop.service;
 import dataart.workshop.converter.UserConverter;
 import dataart.workshop.domain.User;
 import dataart.workshop.dto.v1.ChangePasswordRequest;
+import dataart.workshop.dto.v1.PaginatedUserDto;
+import dataart.workshop.dto.v1.UpdateUserRequest;
 import dataart.workshop.dto.v1.UserDto;
 import dataart.workshop.dto.v1.UserRegistrationRequest;
 import dataart.workshop.dto.v1.UserRegistrationResponse;
-import dataart.workshop.dto.v1.PaginatedUserDto;
-import dataart.workshop.dto.v1.UpdateUserRequest;
 import dataart.workshop.exception.UserNotFoundException;
 import dataart.workshop.repository.UserRepository;
 import dataart.workshop.utils.PageUtils;
@@ -73,6 +73,7 @@ public class UserService {
         destination.setLastName(source.getLastName());
         destination.setEmail(source.getEmail());
         destination.setPhoneNumber(source.getPhoneNumber());
+        destination.setRole(source.getRole());
     }
 
     @Transactional

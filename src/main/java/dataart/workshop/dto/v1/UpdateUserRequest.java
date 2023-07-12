@@ -20,4 +20,6 @@ public class UpdateUserRequest {
     @NotBlank
     private String phoneNumber;
 
+    @NotBlank
+    private String role;
 }

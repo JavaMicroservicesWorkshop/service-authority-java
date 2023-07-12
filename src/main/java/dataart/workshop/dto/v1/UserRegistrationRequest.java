@@ -18,8 +18,11 @@ public class UserRegistrationRequest {
     private String email;
 
     @NotBlank
+    private String password;
+
+    @NotBlank
     private String phoneNumber;
 
     @NotBlank
-    private String password;
+    private String role;
 }

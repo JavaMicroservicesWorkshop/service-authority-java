@@ -1,8 +1,8 @@
 package dataart.workshop.validator;
 
+import dataart.workshop.exception.IncorrectPasswordException;
 import dataart.workshop.exception.UserAlreadyExistException;
 import dataart.workshop.exception.UserNotFoundException;
-import dataart.workshop.exception.IncorrectPasswordException;
 import dataart.workshop.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;

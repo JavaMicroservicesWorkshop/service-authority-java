@@ -1,7 +1,7 @@
 package dataart.workshop.security;
 
+import dataart.workshop.domain.AuthUserDetails;
 import dataart.workshop.domain.User;
-import dataart.workshop.domain.SecurityUser;
 import dataart.workshop.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
 @Component
-public class JwtUserDetailsService implements UserDetailsService {
+public class AuthDetailsService implements UserDetailsService {
 
     private static final String USER_NOT_FOUND = "Can't find user by email: %s";
 
@@ -22,6 +22,6 @@ public class JwtUserDetailsService implements UserDetailsService {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException(USER_NOT_FOUND.formatted(email)));
 
-        return new SecurityUser(user);
+        return new AuthUserDetails(user);
     }
 }
