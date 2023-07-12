@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 @Component
 public class AuthDetailsService implements UserDetailsService {
 
-    private static Logger logger = Logger.getLogger(AuthDetailsService.class.getName());
+    private static final Logger logger = Logger.getLogger(AuthDetailsService.class.getName());
 
     private static final String USER_NOT_FOUND = "Can't find user by email: %s";
 

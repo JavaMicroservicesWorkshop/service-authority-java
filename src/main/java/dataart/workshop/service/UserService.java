@@ -4,6 +4,7 @@ import dataart.workshop.converter.UserConverter;
 import dataart.workshop.domain.User;
 import dataart.workshop.dto.ChangePasswordRequest;
 import dataart.workshop.dto.PaginatedUserDto;
+import dataart.workshop.dto.Role;
 import dataart.workshop.dto.UpdateUserRequest;
 import dataart.workshop.dto.UserDto;
 import dataart.workshop.dto.UserRegistrationRequest;
@@ -12,6 +13,7 @@ import dataart.workshop.exception.UserNotFoundException;
 import dataart.workshop.repository.UserRepository;
 import dataart.workshop.utils.PageUtils;
 import dataart.workshop.validator.UserValidator;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -103,5 +105,24 @@ public class UserService {
     private User findOrElseThrow(String userId) {
         return userRepository.findByUserId(userId)
                 .orElseThrow(() -> new UserNotFoundException(CANT_FIND_USER_ERROR.formatted(userId)));
+    }
+
+    @PostConstruct
+    private void postConstruct() {
+        User admin = createDefaultAdmin();
+
+        userRepository.save(admin);
+    }
+
+    private User createDefaultAdmin() {
+        User admin = new User();
+        admin.setUserId("101");
+        admin.setEmail("admin101@dataart.com");
+        admin.setPassword("password");
+        admin.setFirstName("Admin");
+        admin.setLastName("Admin");
+        admin.setPhoneNumber("+380509876543");
+        admin.setRole(Role.ADMIN);
+        return admin;
     }
 }
