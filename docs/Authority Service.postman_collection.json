@@ -1,0 +1,241 @@
+{
+	"info": {
+		"_postman_id": "a2a369c6-0cca-4be4-8bc2-5bdab38d9c05",
+		"name": "Authority Service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28360523",
+		"_collection_link": "https://da-it-camp.postman.co/workspace/DA-IT-Camp~635f1d25-fe45-4753-bf8a-140b26530aaa/collection/28360523-a2a369c6-0cca-4be4-8bc2-5bdab38d9c05?action=share&creator=28360523&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Get all users",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/v1/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register new user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"John\",\r\n    \"lastName\": \"Doe\",\r\n    \"email\": \"john-doe@gmail.com\",\r\n    \"password\": \"password\",\r\n    \"phoneNumber\": \"380930987600\",\r\n    \"role\": \"admin\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/v1/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get user by id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJraWQiOiIxZjJmNjJmOS1jMTMyLTQ5NGItYTVhYy1lNmZmYzlmYjVkOWEiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJEYXRhQXJ0Iiwic3ViIjoiam9obi1kb2VAZ21haWwuY29tIiwiZXhwIjoxNjg5MTE5NzI1LCJpYXQiOjE2ODkxMTYxMjUsInNjb3BlIjoicGVybTpyZWFkIHBlcm06d3JpdGUifQ.Axez7mjuRPBeXd5zVGCgjaP8D9I8LkpJbzrX0hzyqsGqURhkfYToZhtShG_liVdvyUdWfRaKfmVuQMSGn5tDP2V_ba8DD-egBP2ORFuOPlfC0CuOlrDOQfn22y6CurD8tAD6RTuQd8-Vr8_pxH9yQ5fDrLtRtI3C_RgstBESm1wS5VZ9ZrzFaBeEIKAOTpZ8RHrzlHBOo2i7QLMsIi9OPQ3WXtgkjjvN3FLt4j-DxVBt8VeP3OaEbM0ox6QVZuzWZ0v2fYhwCFBtxay9bbPZfIAxmplMkh4thJY_NgvpAX23XaA8_wWAeQxRK4xqz71MArKR12JKYCfNxnsgPDSNpw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/v1/users/a64f3b39-5a08-4eda-9c20-2339f63ecb3b",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"a64f3b39-5a08-4eda-9c20-2339f63ecb3b"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update user by id",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"Johnny\",\r\n    \"lastName\": \"Doe\",\r\n    \"email\": \"john-doe@gmail.com\",\r\n    \"phoneNumber\": \"380930987600\",\r\n    \"role\": \"user\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/v1/users/95695e6b-801e-4b8e-acb6-9fd2485c5a71",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"95695e6b-801e-4b8e-acb6-9fd2485c5a71"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Change user password",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"oldPassword\": \"password\",\r\n    \"newPassword\": \"pass\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/v1/users/95695e6b-801e-4b8e-acb6-9fd2485c5a71",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"95695e6b-801e-4b8e-acb6-9fd2485c5a71"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete existing user",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/v1/users/95695e6b-801e-4b8e-acb6-9fd2485c5a71",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"95695e6b-801e-4b8e-acb6-9fd2485c5a71"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"john-doe@gmail.com\",\r\n    \"password\": \"password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/v1/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
