@@ -116,9 +116,9 @@ public class UserService {
 
     private User createDefaultAdmin() {
         User admin = new User();
-        admin.setUserId("101");
+        admin.setUserId(UUID.randomUUID().toString());
         admin.setEmail("admin101@dataart.com");
-        admin.setPassword("password");
+        admin.setPassword(passwordEncoder.encode("password"));
         admin.setFirstName("Admin");
         admin.setLastName("Admin");
         admin.setPhoneNumber("+380509876543");
