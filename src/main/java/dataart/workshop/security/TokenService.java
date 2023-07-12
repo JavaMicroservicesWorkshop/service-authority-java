@@ -10,12 +10,14 @@ import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class TokenService {
 
+    private static final Logger logger = Logger.getLogger(TokenService.class.getName());
     private final JwtEncoder encoder;
 
     public String generateToken(UserAuthority userAuthority) {
@@ -32,6 +34,8 @@ public class TokenService {
                 .subject(userAuthority.username())
                 .claim("scope", scope)
                 .build();
+
+        logger.info("JWT token generated");
 
         return encoder
                 .encode(JwtEncoderParameters.from(claims))

@@ -1,7 +1,7 @@
 package dataart.workshop.controller;
 
-import dataart.workshop.dto.v1.JwtTokenDto;
-import dataart.workshop.dto.v1.LoginRequest;
+import dataart.workshop.dto.JwtTokenDto;
+import dataart.workshop.dto.LoginRequest;
 import dataart.workshop.security.AuthenticationService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

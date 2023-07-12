@@ -1,11 +1,11 @@
 package dataart.workshop.converter;
 
 import dataart.workshop.domain.User;
-import dataart.workshop.dto.v1.PaginatedUserDto;
-import dataart.workshop.dto.v1.Role;
-import dataart.workshop.dto.v1.UpdateUserRequest;
-import dataart.workshop.dto.v1.UserDto;
-import dataart.workshop.dto.v1.UserRegistrationRequest;
+import dataart.workshop.dto.PaginatedUserDto;
+import dataart.workshop.dto.Role;
+import dataart.workshop.dto.UpdateUserRequest;
+import dataart.workshop.dto.UserDto;
+import dataart.workshop.dto.UserRegistrationRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 

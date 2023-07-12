@@ -1,6 +1,6 @@
 package dataart.workshop.domain;
 
-import dataart.workshop.dto.v1.Role;
+import dataart.workshop.dto.Role;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

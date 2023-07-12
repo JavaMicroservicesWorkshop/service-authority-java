@@ -9,9 +9,13 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
+import java.util.logging.Logger;
+
 @RequiredArgsConstructor
 @Component
 public class AuthDetailsService implements UserDetailsService {
+
+    private static Logger logger = Logger.getLogger(AuthDetailsService.class.getName());
 
     private static final String USER_NOT_FOUND = "Can't find user by email: %s";
 
@@ -21,6 +25,7 @@ public class AuthDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException(USER_NOT_FOUND.formatted(email)));
+        logger.info("Got user " + user.getUserId() + " by username");
 
         return new AuthUserDetails(user);
     }

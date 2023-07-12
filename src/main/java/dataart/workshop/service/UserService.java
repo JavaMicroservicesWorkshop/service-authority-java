@@ -2,12 +2,12 @@ package dataart.workshop.service;
 
 import dataart.workshop.converter.UserConverter;
 import dataart.workshop.domain.User;
-import dataart.workshop.dto.v1.ChangePasswordRequest;
-import dataart.workshop.dto.v1.PaginatedUserDto;
-import dataart.workshop.dto.v1.UpdateUserRequest;
-import dataart.workshop.dto.v1.UserDto;
-import dataart.workshop.dto.v1.UserRegistrationRequest;
-import dataart.workshop.dto.v1.UserRegistrationResponse;
+import dataart.workshop.dto.ChangePasswordRequest;
+import dataart.workshop.dto.PaginatedUserDto;
+import dataart.workshop.dto.UpdateUserRequest;
+import dataart.workshop.dto.UserDto;
+import dataart.workshop.dto.UserRegistrationRequest;
+import dataart.workshop.dto.UserRegistrationResponse;
 import dataart.workshop.exception.UserNotFoundException;
 import dataart.workshop.repository.UserRepository;
 import dataart.workshop.utils.PageUtils;
@@ -20,11 +20,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
+import java.util.logging.Logger;
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
 
+    private static final Logger logger = Logger.getLogger(UserService.class.getName());
     private static final String CANT_FIND_USER_ERROR = "Can't find user by id: %s";
 
     private final PageUtils pageUtils;
@@ -55,6 +57,8 @@ public class UserService {
         registeredUser.setPassword(passwordEncoder.encode(registeredUser.getPassword()));
 
         userRepository.save(registeredUser);
+        logger.info("New user registered. User is: " + registeredUser.getUserId());
+
         return new UserRegistrationResponse(userId);
     }
 
@@ -83,6 +87,8 @@ public class UserService {
         validator.validatePasswordMatching(changePasswordRequest.getOldPassword(), user.getPassword());
 
         user.setPassword(passwordEncoder.encode(changePasswordRequest.getOldPassword()));
+
+        logger.info("Password changed successfully");
     }
 
     @Transactional
@@ -90,6 +96,8 @@ public class UserService {
         validator.validateUserPresence(userId);
 
         userRepository.deleteByUserId(userId);
+
+        logger.info("User " + userId + " is deleted");
     }
 
     private User findOrElseThrow(String userId) {

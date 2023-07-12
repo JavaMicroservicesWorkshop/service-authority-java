@@ -1,4 +1,4 @@
-package dataart.workshop.dto.v1;
+package dataart.workshop.dto;
 
 public record JwtTokenDto(String token) {
 }
