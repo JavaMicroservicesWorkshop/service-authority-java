@@ -47,7 +47,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"firstName\": \"John\",\r\n    \"lastName\": \"Doe\",\r\n    \"email\": \"john-doe@gmail.com\",\r\n    \"password\": \"password\",\r\n    \"phoneNumber\": \"380930987600\",\r\n    \"role\": \"admin\"\r\n}",
+					"raw": "{\r\n    \"firstName\": \"John\",\r\n    \"lastName\": \"Doe\",\r\n    \"email\": \"john-doe@gmail.com\",\r\n    \"password\": \"password\",\r\n    \"phoneNumber\": \"380930987600\",\r\n    \"role\": \"ADMIN\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -81,7 +81,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJraWQiOiIxZjJmNjJmOS1jMTMyLTQ5NGItYTVhYy1lNmZmYzlmYjVkOWEiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJEYXRhQXJ0Iiwic3ViIjoiam9obi1kb2VAZ21haWwuY29tIiwiZXhwIjoxNjg5MTE5NzI1LCJpYXQiOjE2ODkxMTYxMjUsInNjb3BlIjoicGVybTpyZWFkIHBlcm06d3JpdGUifQ.Axez7mjuRPBeXd5zVGCgjaP8D9I8LkpJbzrX0hzyqsGqURhkfYToZhtShG_liVdvyUdWfRaKfmVuQMSGn5tDP2V_ba8DD-egBP2ORFuOPlfC0CuOlrDOQfn22y6CurD8tAD6RTuQd8-Vr8_pxH9yQ5fDrLtRtI3C_RgstBESm1wS5VZ9ZrzFaBeEIKAOTpZ8RHrzlHBOo2i7QLMsIi9OPQ3WXtgkjjvN3FLt4j-DxVBt8VeP3OaEbM0ox6QVZuzWZ0v2fYhwCFBtxay9bbPZfIAxmplMkh4thJY_NgvpAX23XaA8_wWAeQxRK4xqz71MArKR12JKYCfNxnsgPDSNpw",
+							"value": "",
 							"type": "string"
 						}
 					]
@@ -98,7 +98,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8081/api/v1/users/a64f3b39-5a08-4eda-9c20-2339f63ecb3b",
+					"raw": "http://localhost:8081/api/v1/users/3c4439d4-441c-4d72-be7b-c6f1b7743883",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -108,7 +108,7 @@
 						"api",
 						"v1",
 						"users",
-						"a64f3b39-5a08-4eda-9c20-2339f63ecb3b"
+						"3c4439d4-441c-4d72-be7b-c6f1b7743883"
 					]
 				}
 			},
@@ -121,7 +121,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"firstName\": \"Johnny\",\r\n    \"lastName\": \"Doe\",\r\n    \"email\": \"john-doe@gmail.com\",\r\n    \"phoneNumber\": \"380930987600\",\r\n    \"role\": \"user\"\r\n}",
+					"raw": "{\r\n    \"firstName\": \"Johnny\",\r\n    \"lastName\": \"Doe\",\r\n    \"email\": \"john-doe@gmail.com\",\r\n    \"phoneNumber\": \"380930987600\",\r\n    \"role\": \"USER\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -129,7 +129,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8081/api/v1/users/95695e6b-801e-4b8e-acb6-9fd2485c5a71",
+					"raw": "http://localhost:8081/api/v1/users/f0cb8e2f-e482-4b40-a65f-96f3eec53568",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -139,7 +139,7 @@
 						"api",
 						"v1",
 						"users",
-						"95695e6b-801e-4b8e-acb6-9fd2485c5a71"
+						"f0cb8e2f-e482-4b40-a65f-96f3eec53568"
 					]
 				}
 			},
@@ -160,7 +160,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8081/api/v1/users/95695e6b-801e-4b8e-acb6-9fd2485c5a71",
+					"raw": "http://localhost:8081/api/v1/users/3c4439d4-441c-4d72-be7b-c6f1b7743883",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -170,7 +170,7 @@
 						"api",
 						"v1",
 						"users",
-						"95695e6b-801e-4b8e-acb6-9fd2485c5a71"
+						"3c4439d4-441c-4d72-be7b-c6f1b7743883"
 					]
 				}
 			},
@@ -191,7 +191,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8081/api/v1/users/95695e6b-801e-4b8e-acb6-9fd2485c5a71",
+					"raw": "http://localhost:8081/api/v1/users/3c4439d4-441c-4d72-be7b-c6f1b7743883",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -201,7 +201,7 @@
 						"api",
 						"v1",
 						"users",
-						"95695e6b-801e-4b8e-acb6-9fd2485c5a71"
+						"3c4439d4-441c-4d72-be7b-c6f1b7743883"
 					]
 				}
 			},
@@ -214,7 +214,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\": \"john-doe@gmail.com\",\r\n    \"password\": \"password\"\r\n}",
+					"raw": "{\r\n    \"email\": \"admin101@dataart.com\",\r\n    \"password\": \"password\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
