@@ -88,7 +88,7 @@ public class UserService {
 
         validator.validatePasswordMatching(changePasswordRequest.getOldPassword(), user.getPassword());
 
-        user.setPassword(passwordEncoder.encode(changePasswordRequest.getOldPassword()));
+        user.setPassword(passwordEncoder.encode(changePasswordRequest.getNewPassword()));
 
         logger.info("Password changed successfully");
     }
